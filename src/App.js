@@ -2,15 +2,15 @@ import React from 'react';
 import './assestss/css/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Login from './components/Login';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
   return (
     <React.Fragment>
       <Router>
-        <Routes>
-          <Route path="/" element={<Login/>}/>
-        </Routes>
+        <Switch>
+           <Route path="/" exact render = { props => (<Login {...props}/>)}/>
+        </Switch>
       </Router>
     </React.Fragment>
   );
