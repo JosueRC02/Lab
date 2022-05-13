@@ -5,7 +5,7 @@ class Login extends React.Component{
     render(){
         return(
             <div>
-                Hola desde Login
+                Hola desde Login funciono
             </div>
         );
     }
