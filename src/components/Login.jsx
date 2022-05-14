@@ -7,6 +7,10 @@ import axios from 'axios';
 
 class Login extends React.Component{
 
+    constructor(props){
+        super(props);
+    }
+
     state = {
         form:{
             "cedula": "",
@@ -30,12 +34,19 @@ class Login extends React.Component{
     }
 
     inicioSesion = async () => {
-        console.log(this.state.form)
         try {
+            console.log(this.state.form);
             const response = await axios.post(`${Apiurl}/usuarios/`,  this.state.form);
-            return await response.data;
+            console.log(response);
+            if(response.data.status === 200){
+                this.props.history.push("/Dashboard");
+            }else{
+                this.state.form.cedula = "";
+                this.state.form.password = "";
+                window.location.reload(true);
+            }
         } catch (error) {
-            console.log("Error: ", error);
+            console.log("Error: ", error.response.data);
             return error;
         }
     }
@@ -59,7 +70,6 @@ class Login extends React.Component{
                         </form>
 
                         <div id="formFooter">
-                        <a className="underlineHover" href="#">Forgot Password?</a>
                         </div>
 
                     </div>
