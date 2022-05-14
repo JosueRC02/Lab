@@ -9,7 +9,7 @@ class Login extends React.Component{
 
     state = {
         form:{
-            "usuario": "",
+            "cedula": "",
             "password":""
         },
         error:false,
@@ -29,12 +29,15 @@ class Login extends React.Component{
         })
     }
 
-    inicioSecion = () => {
-        let url = Apiurl + "auth";
-        axios.post(url, this.state.form)
-        .then(res =>{
-            console.log(res);
-        })
+    inicioSesion = async () => {
+        console.log(this.state.form)
+        try {
+            const response = await axios.post(`${Apiurl}/usuarios/`,  this.state.form);
+            return await response.data;
+        } catch (error) {
+            console.log("Error: ", error);
+            return error;
+        }
     }
 
     render(){
@@ -50,9 +53,9 @@ class Login extends React.Component{
                         </div>
 
                         <form onSubmit = {this.manejadorBtn}>
-                        <input type="text" className="fadeIn second" name="usuario" placeholder="Usuario" onChange = {this.change} />
+                        <input type="text" className="fadeIn second" name="cedula" placeholder="Usuario" onChange = {this.change} />
                         <input type="password" className="fadeIn third" name="password" placeholder="Password" onChange = {this.change} />
-                        <input type="submit" className="fadeIn fourth" value="Log In" onClick = {this.inicioSecion} />
+                        <input type="submit" className="fadeIn fourth" value="Log In" onClick = {this.inicioSesion} />
                         </form>
 
                         <div id="formFooter">
