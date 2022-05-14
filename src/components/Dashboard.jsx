@@ -5,7 +5,7 @@ class Dashboard extends React.Component{
     render(){
         return(
             <div>
-                Hola desde Dashboard
+                A ingresado a la pagina principal exitosamente
             </div>
         );
     }

@@ -7,9 +7,6 @@ import axios from 'axios';
 
 class Login extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
 
     state = {
         form:{
@@ -38,15 +35,14 @@ class Login extends React.Component{
             console.log(this.state.form);
             const response = await axios.post(`${Apiurl}/usuarios/`,  this.state.form);
             console.log(response);
-            if(response.data.status === 200){
-                this.props.history.push("/Dashboard");
-            }else{
-                this.state.form.cedula = "";
-                this.state.form.password = "";
-                window.location.reload(true);
-            }
+            console.log(response.data.status);
+            alert("Credenciales correctas");
+            console.log(this.props.history.push("/dashboard"));
+            window.location.reload(true);
         } catch (error) {
+            alert("Credenciales incorrectas");
             console.log("Error: ", error.response.data);
+            window.location.reload(true);
             return error;
         }
     }
@@ -70,6 +66,7 @@ class Login extends React.Component{
                         </form>
 
                         <div id="formFooter">
+
                         </div>
 
                     </div>
